@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carpenter Interior</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #ffd700;
+            --dark-bg: #0a0a0a;
+            --section-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --text-muted: #cccccc;
+            --accent-green: #2d5a3d;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Desktop Styles (keep exactly the same) */
+        .header {
+            height: 100vh;
+            display: grid;
+            grid-template-rows: 1fr 4fr 3fr;
+        }
+
+        .top {
+            background: #565656;
+            min-height: 90px;
+        }
+
+        .middle {
+            background: #000;
+            display: flex;
+            justify-content: space-between;
+            padding: 40px;
+        }
+
+        .bottom {
+            background: #565656;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .company-label {
+            color: #ffd700;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .company-name {
+            color: #ffd700;
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .company-tagline {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            padding: 40px;
+            height: 40%;
+            color: #ffd700;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .contact-info a {
+            color: #ffd700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            color: #ffd700;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            margin: 0px;
+            height: 100%;
+            width: 30vh;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        .main-image {
+            position: absolute;
+            top: 0;
+            right: 30vh;
+            height: 100%;
+            width: 30%;
+        }
+
+        .left-image {
+            position: absolute;
+            top: 40%;
+            left: 30%;
+            height: 55vh;
+            width: 30%;
+        }
+
+        /* Tablet Styles */
+        @media screen and (max-width: 1024px) and (min-width: 769px) {
+            .company-name {
+                font-size: 36px;
+            }
+
+            .main-image {
+                right: 25vh;
+                width: 35%;
+            }
+
+            .left-image {
+                left: 25%;
+                width: 35%;
+                height: 50vh;
+            }
+
+            .contact-info {
+                font-size: 14px;
+            }
+        }
+
+        /* Mobile Styles - Complete UX overhaul */
+        @media screen and (max-width: 768px) {
+            body {
+                background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            }
+
+            .header {
+                height: auto;
+                display: block;
+                min-height: 100vh;
+                position: relative;
+            }
+
+            /* Mobile Hero Section */
+            .top {
+                background: linear-gradient(135deg, #565656 0%, #3a3a3a 100%);
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+            }
+
+            .top::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 3px;
+                background: #ffd700;
+                border-radius: 2px;
+            }
+
+            .middle {
+                background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+                padding: 60px 20px 40px;
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .middle::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: 
+                    radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+                z-index: 1;
+            }
+
+            .company-header {
+                position: relative;
+                z-index: 2;
+                animation: fadeInUp 0.8s ease-out;
+            }
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .company-label {
+                font-size: 12px;
+                letter-spacing: 3px;
+                margin-bottom: 15px;
+                position: relative;
+                display: inline-block;
+            }
+
+            .company-label::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 40px;
+                height: 2px;
+                background: #ffd700;
+                border-radius: 1px;
+            }
+
+            .company-name {
+                font-size: 32px;
+                letter-spacing: 2px;
+                margin-bottom: 15px;
+                background: linear-gradient(135deg, #ffd700 0%, #fff 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                animation: glow 2s ease-in-out infinite alternate;
+            }
+
+            @keyframes glow {
+                from {
+                    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+                }
+                to {
+                    text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+                }
+            }
+
+            .company-tagline {
+                font-size: 14px;
+                letter-spacing: 2px;
+                opacity: 0.8;
+                margin-bottom: 30px;
+            }
+
+            .vertical-text {
+                writing-mode: initial;
+                text-orientation: initial;
+                display: inline-block;
+                padding: 8px 16px;
+                background: rgba(255, 215, 0, 0.1);
+                border: 1px solid rgba(255, 215, 0, 0.3);
+                border-radius: 20px;
+                font-size: 12px;
+                margin-top: 20px;
+                backdrop-filter: blur(10px);
+            }
+
+            /* Mobile Images Section */
+            .images-mobile {
+                padding: 40px 20px;
+                background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+                position: relative;
+            }
+
+            .images-container {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .image-card {
+                position: relative;
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                transform: translateY(0);
+                transition: all 0.3s ease;
+            }
+
+            .image-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            }
+
+            .image-card.main {
+                height: 250px;
+                margin-left: 20px;
+            }
+
+            .image-card.secondary {
+                height: 200px;
+                margin-right: 20px;
+                margin-top: -30px;
+            }
+
+            .image-card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .image-card::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
+            }
+
+            /* Mobile Bottom Section */
+            .bottom {
+                background: linear-gradient(135deg, #565656 0%, #3a3a3a 100%);
+                flex-direction: column;
+                padding: 40px 20px;
+                gap: 30px;
+                position: relative;
+            }
+
+            .bottom::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 3px;
+                background: #ffd700;
+                border-radius: 2px;
+            }
+
+            .contact-info {
+                padding: 0;
+                height: auto;
+                text-align: center;
+                background: rgba(0,0,0,0.2);
+                border-radius: 15px;
+                padding: 30px;
+                backdrop-filter: blur(10px);
+            }
+
+            .contact-info h3 {
+                font-size: 18px;
+                margin-bottom: 20px;
+                color: #ffd700;
+            }
+
+            .contact-info div {
+                margin-bottom: 10px;
+                padding: 5px 0;
+            }
+
+            .contact-info a {
+                display: inline-block;
+                padding: 5px 10px;
+                border-radius: 5px;
+                transition: all 0.3s ease;
+            }
+
+            .contact-info a:hover {
+                background: rgba(255, 215, 0, 0.1);
+                transform: scale(1.05);
+            }
+
+            .logo {
+                width: 120px;
+                height: 80px;
+                margin: 0 auto;
+                background: rgba(255,255,255,0.95);
+                border-radius: 10px;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            }
+
+            /* Hide desktop images on mobile */
+            .main-image,
+            .left-image {
+                display: none;
+            }
+        }
+
+        /* Small Mobile Styles */
+        @media screen and (max-width: 480px) {
+            .middle {
+                padding: 40px 15px 30px;
+            }
+
+            .company-name {
+                font-size: 28px;
+                letter-spacing: 1px;
+            }
+
+            .company-tagline {
+                font-size: 12px;
+                letter-spacing: 1px;
+            }
+
+            .images-container {
+                max-width: 320px;
+            }
+
+            .image-card.main {
+                height: 220px;
+                margin-left: 10px;
+            }
+
+            .image-card.secondary {
+                height: 180px;
+                margin-right: 10px;
+            }
+
+            .contact-info {
+                padding: 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="header">
+        <div class="top"></div>
+        
+        <div class="middle">
+            <div class="company-header">
+                <div class="company-label">COMPANY PROFILE</div>
+                <h1 class="company-name">Carpenter Interior</h1>
+                <div class="company-tagline">INTERIOR MATTERS</div>
+            </div>
+            <div class="vertical-text">www.CarpenterInterior.me</div>
+        </div>
+
+        <!-- Mobile Images Section (hidden on desktop) -->
+        <div class="images-mobile" style="display: none;">
+            <div class="images-container">
+                <div class="image-card main">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect width='400' height='250' fill='%23f0f0f0'/><rect x='50' y='50' width='300' height='150' fill='%233a3a3a' rx='10'/><circle cx='200' cy='125' r='40' fill='%23d4b896'/><rect x='280' y='80' width='80' height='90' fill='%23f5f5f5' rx='5'/><text x='200' y='130' text-anchor='middle' fill='%23666' font-family='Arial' font-size='12'>Interior Design</text></svg>" alt="Main Interior">
+                </div>
+                <div class="image-card secondary">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'><rect width='400' height='200' fill='%23e8e8e8'/><rect x='30' y='30' width='150' height='140' fill='%23e0e0e0' rx='5'/><rect x='220' y='50' width='100' height='100' fill='%23d4b896' rx='50'/><circle cx='105' cy='100' r='25' fill='%23c8c8c8'/><text x='200' y='110' text-anchor='middle' fill='%23666' font-family='Arial' font-size='12'>Modern Living</text></svg>" alt="Secondary Interior">
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom">
+            <div class="contact-info">
+                <h3>contact us :</h3>
+                <div>- <a href="tel:0509558429">0509558429</a></div>
+                <div><a href="mailto:info@CarpenterInterior.me">info@CarpenterInterior.me</a></div>
+                <div><a href="http://www.CarpenterInterior.me" target="_blank">www.CarpenterInterior.me</a></div>
+            </div>
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 80'><rect width='120' height='80' fill='%23fff'/><text x='60' y='35' text-anchor='middle' fill='%23333' font-family='Arial' font-weight='bold' font-size='14'>CARPENTER</text><text x='60' y='55' text-anchor='middle' fill='%23333' font-family='Arial' font-size='10'>INTERIOR</text><path d='M20 65 Q60 50 100 65' stroke='%23ffd700' stroke-width='2' fill='none'/></svg>" alt="Carpenter Interior Logo">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Desktop Images (hidden on mobile) -->
+        <img class="main-image" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'><rect width='400' height='600' fill='%23f0f0f0'/><rect x='50' y='100' width='300' height='400' fill='%233a3a3a' rx='10'/><circle cx='200' cy='300' r='80' fill='%23d4b896'/><rect x='280' y='200' width='100' height='200' fill='%23f5f5f5' rx='5'/><text x='200' y='310' text-anchor='middle' fill='%23666' font-family='Arial' font-size='16'>Main Interior</text></svg>" alt="Main Interior">
+        
+        <img class="left-image" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 350'><rect width='400' height='350' fill='%23e8e8e8'/><rect x='30' y='50' width='200' height='250' fill='%23e0e0e0' rx='5'/><rect x='270' y='80' width='100' height='150' fill='%23d4b896' rx='50'/><circle cx='130' cy='175' r='40' fill='%23c8c8c8'/><text x='200' y='190' text-anchor='middle' fill='%23666' font-family='Arial' font-size='14'>Living Space</text></svg>" alt="Living Space">
+    </section>
+
+    <script>
+        // Show mobile images section on mobile devices
+        function handleResponsive() {
+            const imagesMobile = document.querySelector('.images-mobile');
+            const mainImage = document.querySelector('.main-image');
+            const leftImage = document.querySelector('.left-image');
+            
+            if (window.innerWidth <= 768) {
+                imagesMobile.style.display = 'block';
+                mainImage.style.display = 'none';
+                leftImage.style.display = 'none';
+            } else {
+                imagesMobile.style.display = 'none';
+                mainImage.style.display = 'block';
+                leftImage.style.display = 'block';
+            }
+        }
+
+        // Run on load and resize
+        window.addEventListener('load', handleResponsive);
+        window.addEventListener('resize', handleResponsive);
+
+        // Add scroll animations for mobile
+        function addScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            const animateElements = document.querySelectorAll('.image-card, .contact-info');
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease-out';
+                observer.observe(el);
+            });
+        }
+
+        // Add animations on mobile
+        if (window.innerWidth <= 768) {
+            window.addEventListener('load', addScrollAnimations);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Process | Premium Interior Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #141414;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --accent-primary: #c9b068;
+    --accent-secondary: #e6d18e;
+    --border-subtle: rgba(201, 176, 104, 0.2);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.process-section {
+    padding: 120px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.process-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.process-section-subtitle {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--text-secondary);
+    max-width: 750px;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+.process-container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.process-step {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    
+    opacity: 0;
+    transform: translateY(40px);
+    animation: slideUpFade 0.8s ease-out forwards;
+}
+
+/* Staggered animation delays */
+.process-step:nth-child(1) { animation-delay: 0.1s; }
+.process-step:nth-child(2) { animation-delay: 0.2s; }
+.process-step:nth-child(3) { animation-delay: 0.3s; }
+.process-step:nth-child(4) { animation-delay: 0.4s; }
+
+
+.process-step:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.process-step:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.step-image-container {
+    flex: 1 1 50%;
+    overflow: hidden;
+    height: 450px;
+    position: relative;
+}
+
+.step-image-container::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to right, rgba(20, 20, 20, 0.4), transparent 50%);
+    opacity: 1;
+}
+
+.process-step:nth-child(even) .step-image-container::after {
+    background: linear-gradient(to left, rgba(20, 20, 20, 0.4), transparent 50%);
+}
+
+.step-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.process-step:hover .step-image-container img {
+    transform: scale(1.05);
+}
+
+.step-content {
+    flex: 1 1 50%;
+    padding: 60px 70px;
+    position: relative;
+    z-index: 2;
+}
+
+.step-number {
+    position: absolute;
+    top: -40px;
+    left: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(8rem, 20vw, 12rem);
+    font-weight: 700;
+    color: rgba(224, 224, 224, 0.04);
+    z-index: -1;
+    user-select: none;
+}
+
+.process-step:nth-child(even) .step-content {
+    padding-left: 100px;
+}
+
+.process-step:nth-child(even) .step-number {
+    left: auto;
+    right: 20px;
+}
+
+.step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    transition: color 0.4s ease;
+}
+
+.process-step:hover .step-title {
+    color: var(--accent-secondary);
+}
+
+.step-description {
+    font-size: clamp(1rem, 1.5vw, 1.05rem);
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 450px;
+}
+
+@keyframes slideUpFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .step-content {
+        padding: 50px;
+    }
+    .process-step:nth-child(even) .step-content {
+        padding: 50px;
+    }
+    .step-image-container {
+        height: 400px;
+    }
+}
+
+@media (max-width: 992px) {
+    .process-step,
+    .process-step:nth-child(even) {
+        flex-direction: column;
+    }
+
+    .step-image-container {
+        width: 100%;
+        height: 300px;
+        flex: none;
+    }
+    
+    .step-image-container::after,
+    .process-step:nth-child(even) .step-image-container::after {
+        background: linear-gradient(to top, rgba(20, 20, 20, 0.8), transparent 50%);
+    }
+
+    .step-content {
+        width: 100%;
+        flex: none;
+        padding: 40px;
+    }
+    
+    .process-step:nth-child(even) .step-content {
+        padding: 40px;
+    }
+
+    .step-number {
+        top: -20px;
+        font-size: 8rem;
+    }
+    
+    .step-description {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .process-section {
+        padding: 80px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-header {
+        margin-bottom: 60px;
+    }
+    .process-container {
+        gap: 40px;
+    }
+    .step-image-container {
+        height: 250px;
+    }
+    .step-content {
+        padding: 30px 25px;
+    }
+    .step-number {
+        top: 10px;
+        font-size: 6rem;
+    }
+    .step-title {
+        font-size: 1.8rem;
+    }
+}
+    </style>
+</head>
+<body>
+
+<section class="process-section">
+    <div class="section-header">
+        <h2 class="process-section-title">Our Professional Approach</h2>
+        <p class="process-section-subtitle">
+            A transparent and structured four-step process, designed to transform your vision into an impeccably executed reality with clarity and excellence at every stage.
+        </p>
+    </div>
+
+    <div class="process-container">
+        <div class="process-step">
+            <div class="step-image-container">
+                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=1470&auto=format&fit=crop" alt="Interior design consultation and planning">
+            </div>
+            <div class="step-content">
+                <span class="step-number">01</span>
+                <h3 class="step-title">Discovery & Consultation</h3>
+                <p class="step-description">
+                    Our journey begins with a comprehensive consultation to understand your vision, functional needs, and aesthetic preferences, forming the foundation of the project.
+                </p>
+            </div>
+        </div>
+
+        <div class="process-step">
+            <div class="step-image-container">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1470&auto=format&fit=crop" alt="3D design and architectural planning">
+            </div>
+            <div class="step-content">
+                <span class="step-number">02</span>
+                <h3 class="step-title">Design & Visualization</h3>
+                <p class="step-description">
+                    We translate our initial concepts into detailed mood boards, floor plans, and photorealistic 3D renderings, allowing you to visualize the final space with precision.
+                </p>
+            </div>
+        </div>
+
+        <div class="process-step">
+            <div class="step-image-container">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1471&auto=format&fit=crop" alt="Interior construction and installation">
+            </div>
+            <div class="step-content">
+                <span class="step-number">03</span>
+                <h3 class="step-title">Execution & Management</h3>
+                <p class="step-description">
+                    Our dedicated project managers oversee every aspect of the build-out, ensuring quality craftsmanship, adherence to timelines, and seamless coordination of all trades.
+                </p>
+            </div>
+        </div>
+
+        <div class="process-step">
+            <div class="step-image-container">
+                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1287&auto=format&fit=crop" alt="Final interior styling and handover">
+            </div>
+            <div class="step-content">
+                <span class="step-number">04</span>
+                <h3 class="step-title">Styling & Handover</h3>
+                <p class="step-description">
+                    The final stage involves meticulous styling with furniture, art, and accessories. We conclude with a formal handover, presenting you with your completed, move-in-ready space.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

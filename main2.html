@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carpenter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #c6a74a;
+            --dark-bg: #0a0a0a;
+            --section-bg: #1a1a1a;
+            --text-light: #f0f0f0;
+            --text-muted: #a0a0a0;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        /* Base & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            color: var(--primary-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-light);
+        }
+
+        /* Main Grid Layout */
+        .header {
+            height: 100vh;
+            display: grid;
+            grid-template-rows: 10% 60% 30%;
+            position: relative;
+            z-index: 1; /* For stacking context */
+        }
+        
+        .middle {
+            background-color: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5vw;
+            position: relative;
+            z-index: 2; /* Ensure content is on top */
+        }
+
+        .bottom {
+            background-color: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5vw;
+            z-index: 2;
+        }
+        
+        /* Company Info */
+        .company-header {
+            max-width: 450px;
+        }
+
+        .company-label {
+            font-family: var(--font-body);
+            color: var(--primary-gold);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .company-name {
+            font-family: var(--font-display);
+            color: var(--primary-gold);
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 300;
+            letter-spacing: 2px;
+            line-height: 1.1;
+        }
+
+        .company-tagline {
+            font-family: var(--font-display);
+            color: var(--text-light);
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        .vertical-text {
+            font-family: var(--font-body);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            color: var(--primary-gold);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .contact-info h3 {
+            font-family: var(--font-body);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: var(--primary-gold);
+        }
+
+        .contact-info div {
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-info a {
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-gold);
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 15vw;
+        }
+        
+        .logo {
+            width: 80%;
+            max-width: 150px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Images */
+        .image-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0; /* Place behind all content */
+        }
+        
+        .main-image {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            height: 80%;
+            width: 45%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.8;
+        }
+
+        .left-image {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            width: 30%;
+            height: 50%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.6;
+            filter: grayscale(100%);
+            mix-blend-mode: luminosity;
+        }
+
+        /* =================================================================== */
+        /* =================== RESPONSIVE STYLES ==================== */
+        /* =================================================================== */
+        @media (max-width: 1024px) {
+            .header {
+                grid-template-rows: 1fr 2fr 1fr;
+            }
+            
+            .main-image {
+                width: 50%;
+                height: 70%;
+            }
+
+            .left-image {
+                bottom: 5%;
+                width: 35%;
+                height: 45%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                height: auto;
+                grid-template-rows: none;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            /* Images are now a single background on mobile */
+            .image-container,
+            .main-image,
+            .left-image {
+                display: none;
+            }
+
+            .mobile-background {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url('https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=1470&auto=format&fit=crop');
+                background-size: cover;
+                background-position: center;
+                filter: brightness(0.3) grayscale(50%);
+                z-index: 0;
+            }
+
+            .middle {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                min-height: 60vh;
+                padding: 40px 20px;
+                background: transparent;
+                position: relative;
+            }
+
+            .company-header {
+                margin-bottom: 2rem;
+            }
+
+            .company-name {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .company-tagline {
+                font-size: clamp(0.8rem, 3vw, 1.1rem);
+                letter-spacing: 2px;
+            }
+
+            .vertical-text {
+                display: none;
+            }
+            
+            .bottom {
+                flex-direction: column-reverse;
+                align-items: center;
+                text-align: center;
+                padding: 40px 20px;
+                background: var(--dark-bg);
+                position: relative;
+            }
+
+            .contact-info {
+                margin-top: 2rem;
+                padding: 0;
+            }
+
+            .logo-container {
+                width: 150px;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<section class="header">
+    <div class="image-container">
+        <img class="main-image" src="./images/test2.jpg" alt="A luxurious, modern living room interior.">
+        <img class="left-image" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1470&auto=format&fit=crop" alt="A grand entrance hallway with a staircase.">
+    </div>
+
+    <div class="mobile-background"></div>
+
+    <div class="middle">
+        <div class="company-header">
+            <div class="company-label">COMPANY PROFILE</div>
+            <h1 class="company-name">Carpenter Interior</h1>
+            <div class="company-tagline">INTERIOR MATTERS</div>
+        </div>
+        <div class="vertical-text">www.CarpenterInterior.me</div>
+    </div>
+
+    <div class="bottom">
+        <div class="contact-info">
+            <h3>contact us :</h3>
+            <div><a href="tel:0509558429">+971 50 955 8429</a></div>
+            <div><a href="mailto:info@CarpenterInterior.me">info@CarpenterInterior.me</a></div>
+            <div><a href="http://www.CarpenterInterior.me" target="_blank">www.CarpenterInterior.me</a></div>
+        </div>
+        <div class="logo-container">
+            <div class="logo">
+                <img src="./images/file (1).svg" alt="Carpenter Interior Logo">
+            </div>
+        </div>
+    </div>
+</section>
+    
+</body>
+</html>

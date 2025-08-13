@@ -1,0 +1,604 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Core Team | The Visionaries</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1D1D1D;
+            --primary-text-color: #EAEAEA;
+            --secondary-text-color: #A9A9A9;
+            --accent-color: #C0A062; /* A sophisticated, muted gold */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .team-section {
+            padding: 120px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 500;
+            color: var(--primary-text-color);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--secondary-text-color);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .team-member {
+            background-color: var(--surface-color);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .member-image-container {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .member-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .team-member:hover .member-image {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .member-info {
+            padding: 30px;
+        }
+
+        .member-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-text-color);
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .member-description {
+            font-size: 0.95rem;
+            color: var(--secondary-text-color);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .member-social {
+            display: flex;
+            gap: 12px;
+            opacity: 0.6;
+            transition: opacity 0.4s ease-in-out;
+        }
+        
+        .team-member:hover .member-social {
+            opacity: 1;
+        }
+
+        .social-link {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .social-link:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--bg-color);
+            transform: scale(1.05);
+        }
+        
+        /* Special effect for founder cards */
+        .founder-card {
+            position: relative;
+        }
+
+        .founder-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 16px;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, var(--accent-color), transparent, var(--accent-color)) border-box;
+            -webkit-mask:
+                linear-gradient(#fff 0 0) padding-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .founder-card:hover::after {
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .team-section {
+                padding: 80px 15px;
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+                gap: 40px;
+            }
+             .member-image-container {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-section {
+                padding: 60px 10px;
+            }
+            .section-subtitle {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Staggered entrance animation */
+        .team-member:nth-child(1) { animation-delay: 0.1s; }
+        .team-member:nth-child(2) { animation-delay: 0.2s; }
+        .team-member:nth-child(3) { animation-delay: 0.3s; }
+        .team-member:nth-child(4) { animation-delay: 0.4s; }
+        .team-member:nth-child(5) { animation-delay: 0.5s; }
+        .team-member:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="team-section">
+        <div class="section-header">
+            <h2 class="section-title">The Visionaries</h2>
+            <p class="section-subtitle">
+                Meet the minds behind the masterpiece. Our team of architects and designers brings passion, expertise, and a shared vision for transformative design to every project.
+            </p>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-member founder-card">
+                <div class="member-image-container">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616c047ef01?w=400&h=400&fit=crop&crop=faces" alt="Amna Moin" class="member-image">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">AMNA MOIN</h3>
+                    <p class="member-role">Founder & Principal Designer</p>
+                    <p class="member-description">
+                        With over 15 years in luxury design, Amna's visionary leadership ensures every space is a seamless blend of timeless elegance and functional art.
+                    </p>
+                    <div class="member-social">
+                        <a href="#" class="social-link" title="LinkedIn">in</a>
+                        <a href="#" class="social-link" title="Email">@</a>
+                        <a href="#" class="social-link" title="Instagram">ig</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-member founder-card">
+                <div class="member-image-container">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=faces" alt="Oussama Hadroug" class="member-image">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">OUSSAMA HADROUG</h3>
+                    <p class="member-role">Co-Founder & Lead Architect</p>
+                    <p class="member-description">
+                        A creative powerhouse specializing in contemporary solutions. Oussama pushes the boundaries of architectural innovation and spatial planning.
+                    </p>
+                    <div class="member-social">
+                        <a href="#" class="social-link" title="LinkedIn">in</a>
+                        <a href="#" class="social-link" title="Email">@</a>
+                        <a href="#" class="social-link" title="Instagram">ig</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=faces" alt="Design Director" class="member-image">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">SARAH JOHNSON</h3>
+                    <p class="member-role">Design Director</p>
+                    <p class="member-description">
+                        Award-winning designer with a passion for sustainable luxury. Leads our creative team in developing innovative concepts that define tomorrow's spaces.
+                    </p>
+                    <div class="member-social">
+                        <a href="#" class="social-link" title="LinkedIn">in</a>
+                        <a href="#" class="social-link" title="Email">@</a>
+                        <a href="#" class="social-link" title="Instagram">ig</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=faces" alt="Project Manager" class="member-image">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">MICHAEL CHEN</h3>
+                    <p class="member-role">Head of Projects</p>
+                    <p class="member-description">
+                        A master of coordination and execution. Michael ensures every project is delivered seamlessly, upholding our standards of excellence from concept to completion.
+                    </p>
+                    <div class="member-social">
+                        <a href="#" class="social-link" title="LinkedIn">in</a>
+                        <a href="#" class="social-link" title="Email">@</a>
+                        <a href="#" class="social-link" title="Instagram">ig</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces" alt="Abdul Moin" class="member-image">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">ABDUL MOIN</h3>
+                    <p class="member-role">Senior Civil Engineer</p>
+                    <p class="member-description">
+                        Where technical excellence meets creative vision. Ensures structural integrity while perfectly preserving the design's aesthetic intent.
+                    </p>
+                    <div class="member-social">
+                        <a href="#" class="social-link" title="LinkedIn">in</a>
+                        <a href="#" class="social-link" title="Email">@</a>
+                        <a href="#" class="social-link" title="Instagram">ig</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=faces" alt="Rabah Insaf" class="member-image">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">DAVID LEE</h3>
+                    <p class="member-role">Client Relations Manager</p>
+                    <p class="member-description">
+                        The strategic mind behind our client relationships. David specializes in building lasting partnerships and ensuring a flawless client experience.
+                    </p>
+                    <div class="member-social">
+                        <a href="#" class="social-link" title="LinkedIn">in</a>
+                        <a href="#" class="social-link" title="Email">@</a>
+                        <a href="#" class="social-link" title="Instagram">ig</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core Team | Your Company</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #000000; /* Black background */
+            --primary-text-color: #FFFFFF; /* White text for names and title */
+            --secondary-text-color: #EAEAEA; /* Slightly off-white for general text */
+            --accent-color: #F8D000; /* Yellow from the image */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 50px 0; /* Add some vertical padding for the whole section */
+        }
+
+        .team-section {
+            padding: 0px 20px; /* Reduced padding from original */
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 500;
+            color: var(--accent-color); /* Title color from image */
+            margin-bottom: 50px; /* Space between title and grid */
+            letter-spacing: 0px; /* No letter spacing like in the image */
+            text-align: left; /* Aligned left as in the image */
+            padding-left: 20px; /* Align with image grid start */
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax for 4 columns */
+            gap: 20px; /* Reduced gap to match tighter spacing in image */
+        }
+
+        .team-member {
+            position: relative;
+            /* No background-color, border-radius, overflow, box-shadow */
+            transition: none; /* Remove transitions */
+            opacity: 1; /* Ensure visible */
+            transform: none; /* Remove transform */
+            animation: none; /* Remove animation */
+        }
+
+        .member-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* Creates a square container for the image */
+            overflow: hidden;
+        }
+
+        .member-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Images are already B&W in the screenshot, no filter needed */
+            filter: grayscale(100%); /* Apply grayscale for consistency with the screenshot */
+            transition: none; /* No hover effect for image filter or scale */
+        }
+
+        .team-member:hover .member-image {
+            filter: grayscale(100%); /* Keep grayscale on hover */
+            transform: none; /* No scale on hover */
+        }
+
+        .member-info {
+            padding: 15px 0 0 0; /* Minimal padding */
+            text-align: left; /* Align text left */
+        }
+
+        .member-name {
+            font-size: 1.2rem; /* Adjusted font size */
+            font-weight: 500; /* Adjusted font weight */
+            color: var(--primary-text-color);
+            margin-bottom: 5px; /* Minimal margin */
+        }
+
+        .member-role {
+            font-size: 0.9rem; /* Adjusted font size */
+            color: var(--accent-color); /* Yellow color for role */
+            font-weight: 400; /* Lighter font weight */
+            margin-bottom: 0px; /* No bottom margin */
+            text-transform: none; /* No uppercase */
+            letter-spacing: 0px; /* No letter spacing */
+            position: relative;
+            padding-bottom: 5px; /* Space for the underline */
+        }
+
+        .member-role::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 80px; /* Underline width as in the image */
+            height: 1px; /* Underline thickness */
+            background-color: var(--accent-color); /* Underline color */
+        }
+
+
+        .team-member {
+           position: relative;
+           transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transitions for hover effect */
+           opacity: 1;
+           transform: none;
+           animation: none;
+       }
+
+       .team-member:hover {
+           transform: translateY(-5px); /* Move card up slightly on hover */
+           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Add a subtle shadow on hover */
+       }
+
+       .member-image {
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           object-fit: cover;
+           filter: grayscale(100%);
+           transition: none; /* Prevent grayscale change on hover */
+       }
+
+       .team-member:hover .member-image {
+           filter: grayscale(100%); /* Keep grayscale on hover */
+           transform: none;
+       }
+        
+        /* Removed .member-description and .member-social styles */
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust for smaller screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .team-section {
+                padding: 0px 15px;
+            }
+            .section-title {
+                font-size: 3rem;
+                margin-bottom: 40px;
+                padding-left: 0;
+                text-align: center;
+            }
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Allow two columns on tablets */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-section {
+                padding: 0px 10px;
+            }
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 30px;
+            }
+            .team-grid {
+                grid-template-columns: 1fr; /* Single column on mobile */
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="team-section">
+        <h2 class="section-title">Core Team.</h2>
+
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="./images/team/CEO.jpeg" alt="Amna Moin" class="member-image">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">AMNA MOIN</h3>
+                    <p class="member-role">FOUNDER</p>
+                    <p class="member-role">Architect & Interior designer</p>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="./images/team/CEO.jpeg" alt="Oussama Hadroug" class="member-image">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">OUSSAMA HADROUG</h3>
+                    <p class="member-role">CO-FOUNDER</p>
+                    <p class="member-role">Architect & Interior designer</p>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="./images/team/Tanzil_Ahmed.jpeg" alt="Abdul Moin" class="member-image">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">ABDUL MOIN</h3>
+                    <p class="member-role">Senior civil engineer</p>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="http://googleusercontent.com/file_content/0" alt="Rabah Insaf" class="member-image">
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">RABAH INSAF</h3>
+                    <p class="member-role">Business Developer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

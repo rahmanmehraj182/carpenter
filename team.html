@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Core Team</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .team-section {
+            padding: 100px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .team-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .section-header {
+            text-align: left;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 300;
+            color: #ffd700;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #ffd700, #ffed4a);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #cccccc;
+            max-width: 600px;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .team-member {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 25px 50px rgba(255, 215, 0, 0.2), 0 0 0 1px rgba(255, 215, 0, 0.1);
+        }
+
+        .member-image-container {
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+            background: #2a2a2a;
+        }
+
+        .member-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(0.7);
+            transition: all 0.5s ease;
+        }
+
+        .team-member:hover .member-image {
+            filter: grayscale(0%) brightness(1);
+            transform: scale(1.05);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 215, 0, 0.1) 0%,
+                rgba(0, 0, 0, 0.3) 50%,
+                rgba(255, 215, 0, 0.05) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .team-member:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .member-info {
+            padding: 30px;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .member-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .member-role {
+            font-size: 1rem;
+            color: #ffd700;
+            font-weight: 500;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+
+        .member-title {
+            font-size: 0.95rem;
+            color: #cccccc;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .member-description {
+            font-size: 0.9rem;
+            color: #aaaaaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .member-social {
+            display: flex;
+            gap: 15px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .team-member:hover .member-social {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .social-link {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+            transform: scale(1.1);
+        }
+
+        .stats-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 215, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .stats-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffed4a);
+            width: 0%;
+            transition: width 1s ease 0.5s;
+        }
+
+        .team-member:hover .stats-fill {
+            width: 100%;
+        }
+
+        /* Special effects for founder cards */
+        .founder-card {
+            position: relative;
+        }
+
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ffd700, #ffed4a, #ffd700);
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .founder-card:hover::before {
+            opacity: 0.5;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .team-section {
+                padding: 60px 15px;
+            }
+            
+            .section-header {
+                margin-bottom: 50px;
+                text-align: center;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .member-image-container {
+                height: 300px;
+            }
+
+            .member-info {
+                padding: 25px;
+            }
+
+            .member-social {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-section {
+                padding: 40px 10px;
+            }
+
+            .member-info {
+                padding: 20px;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* Animation for staggered entrance */
+        .team-member {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .team-member:nth-child(1) { animation-delay: 0.1s; }
+        .team-member:nth-child(2) { animation-delay: 0.2s; }
+        .team-member:nth-child(3) { animation-delay: 0.3s; }
+        .team-member:nth-child(4) { animation-delay: 0.4s; }
+        .team-member:nth-child(5) { animation-delay: 0.5s; }
+        .team-member:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="team-section">
+        <div class="section-header">
+            <h2 class="section-title">Core Team.</h2>
+            <p class="section-subtitle">
+                Meet the visionary minds behind our extraordinary designs. Our diverse team of architects, designers, and creative professionals brings decades of combined experience to transform spaces into works of art.
+            </p>
+        </div>
+
+        <div class="team-grid">
+            <!-- Founder -->
+            <div class="team-member founder-card">
+                <div class="member-image-container">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616c047ef01?w=400&h=350&fit=crop&crop=face" alt="Amna Moin" class="member-image">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">AMNA MOIN</h3>
+                    <p class="member-role">FOUNDER</p>
+                    <p class="member-title">Architect & Interior Designer</p>
+                    <p class="member-description">
+                        Visionary leader with 15+ years of experience in luxury interior design. Specializes in creating spaces that seamlessly blend functionality with aesthetic excellence.
+                    </p>
+                    <div class="member-social">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">@</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="stats-bar">
+                    <div class="stats-fill"></div>
+                </div>
+            </div>
+
+            <!-- Co-Founder -->
+            <div class="team-member founder-card">
+                <div class="member-image-container">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=350&fit=crop&crop=face" alt="Oussama Hadroug" class="member-image">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">OUSSAMA HADROUG</h3>
+                    <p class="member-role">CO-FOUNDER</p>
+                    <p class="member-title">Architect & Interior Designer</p>
+                    <p class="member-description">
+                        Creative powerhouse specializing in contemporary design solutions. Expert in spatial planning and innovative architectural concepts that push creative boundaries.
+                    </p>
+                    <div class="member-social">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">@</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="stats-bar">
+                    <div class="stats-fill"></div>
+                </div>
+            </div>
+
+            <!-- Senior Engineer -->
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=350&fit=crop&crop=face" alt="Abdul Moin" class="member-image">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">ABDUL MOIN</h3>
+                    <p class="member-role">SENIOR CIVIL ENGINEER</p>
+                    <p class="member-title">Structural & Project Management</p>
+                    <p class="member-description">
+                        Technical excellence meets creative vision. Ensures structural integrity while maintaining design aesthetics. Expert in project management and quality assurance.
+                    </p>
+                    <div class="member-social">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">@</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="stats-bar">
+                    <div class="stats-fill"></div>
+                </div>
+            </div>
+
+            <!-- Business Developer -->
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=350&fit=crop&crop=face" alt="Rabah Insaf" class="member-image">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">RABAH INSAF</h3>
+                    <p class="member-role">BUSINESS DEVELOPER</p>
+                    <p class="member-title">Strategic Partnerships & Growth</p>
+                    <p class="member-description">
+                        Strategic mind behind business expansion and client relationships. Specializes in identifying opportunities and building lasting partnerships in the luxury market.
+                    </p>
+                    <div class="member-social">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">@</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="stats-bar">
+                    <div class="stats-fill"></div>
+                </div>
+            </div>
+
+            <!-- Additional Team Member 1 -->
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=350&fit=crop&crop=face" alt="Design Director" class="member-image">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">SARAH JOHNSON</h3>
+                    <p class="member-role">DESIGN DIRECTOR</p>
+                    <p class="member-title">Creative Strategy & Innovation</p>
+                    <p class="member-description">
+                        Award-winning designer with a passion for sustainable luxury. Leads our creative team in developing innovative design solutions that define tomorrow's spaces.
+                    </p>
+                    <div class="member-social">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">@</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="stats-bar">
+                    <div class="stats-fill"></div>
+                </div>
+            </div>
+
+            <!-- Additional Team Member 2 -->
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=350&fit=crop&crop=face" alt="Project Manager" class="member-image">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">MICHAEL CHEN</h3>
+                    <p class="member-role">PROJECT MANAGER</p>
+                    <p class="member-title">Operations & Client Success</p>
+                    <p class="member-description">
+                        Master of coordination and execution. Ensures seamless project delivery from concept to completion, maintaining our standards of excellence throughout every phase.
+                    </p>
+                    <div class="member-social">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">@</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="stats-bar">
+                    <div class="stats-fill"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

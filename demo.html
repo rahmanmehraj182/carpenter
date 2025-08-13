@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>STUDIO SEG — Company Profile</title>
+  <style>
+    :root{
+      --bg:#000;            /* brand black */
+      --gold:#d4af37;       /* brand gold */
+      --muted:#111;         /* cards / stripes */
+      --soft:#191919;       /* alt panels */
+      --text:#f4f4f4;       /* base light text */
+      --text-dim:#c9c9c9;   /* secondary text */
+      --border:rgba(212,175,55,.35);
+      --shadow:0 10px 25px rgba(0,0,0,.35);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:linear-gradient(180deg,var(--bg),#020202 60%,var(--bg));
+      color:var(--text); font:400 16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    /* Layout */
+    .wrap{display:grid; grid-template-columns: 320px 1fr; min-height:100dvh}
+    @media (max-width: 1000px){ .wrap{grid-template-columns: 1fr} }
+
+    /* Sidebar */
+    .side{
+      position:sticky; top:0; align-self:start; height:100dvh; overflow:auto;
+      padding:28px 22px; border-right:1px solid var(--border);
+      background:linear-gradient(180deg,#050505, #0b0b0b);
+    }
+    .brand{display:flex; align-items:center; gap:12px; margin-bottom:18px}
+    .logo{
+      width:42px; height:42px; border-radius:10px; background: conic-gradient(from 210deg, var(--gold), #6b5717, var(--gold));
+      box-shadow:inset 0 0 0 2px rgba(255,255,255,.06), var(--shadow);
+    }
+    .brand h1{margin:0; font-size:20px; letter-spacing:.12em; font-weight:700}
+    .tag{margin:2px 0 18px; color:var(--text-dim); font-size:13px; letter-spacing:.12em}
+
+    .nav{display:grid; gap:6px}
+    .nav a{
+      text-decoration:none; color:var(--text); padding:10px 12px; border-radius:10px;
+      border:1px solid transparent;
+      display:flex; align-items:center; justify-content:space-between;
+      background:linear-gradient(180deg,#0b0b0b,#070707);
+    }
+    .nav a span{opacity:.8}
+    .nav a:hover{border-color:var(--border); box-shadow:0 0 0 2px rgba(212,175,55,.12) inset}
+
+    .cta{
+      margin-top:16px; display:flex; gap:10px; flex-wrap:wrap
+    }
+    .btn{cursor:pointer; border:1px solid var(--border); background:transparent; color:var(--gold);
+      padding:10px 14px; border-radius:999px; letter-spacing:.08em; font-weight:600}
+    .btn:hover{background:rgba(212,175,55,.08)}
+
+    /* Slides container */
+    main{position:relative}
+    .slides{
+      scroll-snap-type:y mandatory; height:100%; overflow:auto; max-height:100dvh;
+    }
+    section.slide{
+      position:relative; min-height:100dvh; padding:80px clamp(18px,3vw,48px);
+      display:grid; align-content:center; gap:22px; scroll-snap-align:start; border-bottom:1px dashed rgba(212,175,55,.18);
+      background:
+        radial-gradient(1200px 600px at 120% -10%, rgba(212,175,55,.06), transparent 60%),
+        radial-gradient(1000px 500px at -10% 110%, rgba(212,175,55,.04), transparent 60%);
+    }
+    .kicker{color:var(--gold); text-transform:uppercase; letter-spacing:.28em; font-size:12px}
+    h2.title{margin:0; font-size: clamp(28px, 4vw, 46px); line-height:1.15}
+    .desc{max-width:80ch; color:var(--text-dim)}
+
+    .grid{display:grid; gap:16px}
+    .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width: 900px){ .grid.cols-2, .grid.cols-3{grid-template-columns:1fr} }
+
+    .card{
+      background:linear-gradient(180deg,var(--muted), var(--soft));
+      border:1px solid var(--border); border-radius:16px; padding:18px; box-shadow:var(--shadow);
+    }
+    .badge{display:inline-block; padding:6px 10px; border-radius:999px; border:1px solid var(--border); color:var(--gold); font-size:12px; letter-spacing:.12em}
+
+    /* Slide number / next-prev */
+    .meta{position:absolute; inset:auto 18px 18px auto; display:flex; gap:10px; align-items:center}
+    .chip{font-size:12px; color:var(--gold); opacity:.85; border:1px solid var(--border); padding:6px 10px; border-radius:999px}
+    .arrow{width:38px; height:38px; display:grid; place-items:center; border:1px solid var(--border); border-radius:12px; background:transparent; color:var(--gold)}
+    .arrow:hover{background:rgba(212,175,55,.08)}
+    .sep{flex:1}
+
+    /* Tables / lists */
+    ul.clean{list-style:none; padding:0; margin:0; display:grid; gap:8px}
+    .li{display:flex; gap:10px}
+    .dot{width:8px; height:8px; border-radius:999px; background:var(--gold); margin-top:.7em}
+
+    /* Footer */
+    footer{padding:28px; text-align:center; color:var(--text-dim)}
+
+    /* Helpers */
+    .muted{color:var(--text-dim)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    .spacer{height:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- SIDE NAV -->
+    <aside class="side">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>STUDIO SEG</h1>
+      </div>
+      <div class="tag">INTERIOR MATTERS</div>
+      <nav class="nav" id="toc">
+        <!-- Auto-generated quickly: 40 entries matching the slide ids -->
+        <a href="#s1"><strong>01</strong> <span>Cover</span></a>
+        <a href="#s2"><strong>02</strong> <span>About Us</span></a>
+        <a href="#s3"><strong>03</strong> <span>Index</span></a>
+        <a href="#s4"><strong>04</strong> <span>Our Mission</span></a>
+        <a href="#s5"><strong>05</strong> <span>Our Vision</span></a>
+        <a href="#s6"><strong>06</strong> <span>What Makes Us Different</span></a>
+        <a href="#s7"><strong>07</strong> <span>Design Strategy</span></a>
+        <a href="#s8"><strong>08</strong> <span>What We Do</span></a>
+        <a href="#s9"><strong>09</strong> <span>Lighting Promise</span></a>
+        <a href="#s10"><strong>10</strong> <span>Our Process</span></a>
+        <a href="#s11"><strong>11</strong> <span>Core Team</span></a>
+        <a href="#s12"><strong>12</strong> <span>Projects — Overview</span></a>
+        <a href="#s13"><strong>13</strong> <span>Mehadji Apartment</span></a>
+        <a href="#s14"><strong>14</strong> <span>Mrs. Loubna’s Apartment</span></a>
+        <a href="#s15"><strong>15</strong> <span>Mr Abdullah Al Amiri Majlis</span></a>
+        <a href="#s16"><strong>16</strong> <span>Nakheel Cafe</span></a>
+        <a href="#s17"><strong>17</strong> <span>Bride Home Shop</span></a>
+        <a href="#s18"><strong>18</strong> <span>Taimor Villa</span></a>
+        <a href="#s19"><strong>19</strong> <span>Amir Cafe — Istanbul</span></a>
+        <a href="#s20"><strong>20</strong> <span>Insaf Landscape</span></a>
+        <a href="#s21"><strong>21</strong> <span>Abdul Moin Villa</span></a>
+        <a href="#s22"><strong>22</strong> <span>Talal Villa</span></a>
+        <a href="#s23"><strong>23</strong> <span>Yousaf Apartment</span></a>
+        <a href="#s24"><strong>24</strong> <span>Sabrina Apartment</span></a>
+        <a href="#s25"><strong>25</strong> <span>Gallery I</span></a>
+        <a href="#s26"><strong>26</strong> <span>Gallery II</span></a>
+        <a href="#s27"><strong>27</strong> <span>Gallery III</span></a>
+        <a href="#s28"><strong>28</strong> <span>Gallery IV</span></a>
+        <a href="#s29"><strong>29</strong> <span>Gallery V</span></a>
+        <a href="#s30"><strong>30</strong> <span>Gallery VI</span></a>
+        <a href="#s31"><strong>31</strong> <span>Gallery VII</span></a>
+        <a href="#s32"><strong>32</strong> <span>Gallery VIII</span></a>
+        <a href="#s33"><strong>33</strong> <span>Services — Interior</span></a>
+        <a href="#s34"><strong>34</strong> <span>Services — Decoration</span></a>
+        <a href="#s35"><strong>35</strong> <span>Services — Landscape</span></a>
+        <a href="#s36"><strong>36</strong> <span>Contact</span></a>
+        <a href="#s37"><strong>37</strong> <span>Social / Web</span></a>
+        <a href="#s38"><strong>38</strong> <span>Clients Say</span></a>
+        <a href="#s39"><strong>39</strong> <span>Why Us</span></a>
+        <a href="#s40"><strong>40</strong> <span>Thank You</span></a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn" href="#s1">Top</a>
+        <a class="btn" href="#s40">End</a>
+      </div>
+
+      <div style="margin-top:18px; font-size:13px; color:var(--text-dim)">
+        <div><span class="badge">Brand</span> Black & Gold</div>
+        <div class="spacer"></div>
+        <div><span class="badge">Status</span> 40 slides structured</div>
+      </div>
+    </aside>
+
+    <!-- SLIDES -->
+    <main>
+      <div class="slides">
+        <!-- 01 COVER -->
+        <section id="s1" class="slide">
+          <div class="kicker">Company Profile</div>
+          <h2 class="title">STUDIO SEG — Interior Matters</h2>
+          <p class="desc">Specialized in turnkey high‑end residential luxury homes and commercial projects. Luxurious, sophisticated interiors of timeless quality, extraordinary design, and functionality — infused with each client’s personal style and delivered to budget and timeline.</p>
+          <div class="grid cols-2">
+            <div class="card">
+              <div class="kicker">Contact</div>
+              <div class="grid">
+                <div>info@studioseg.me</div>
+                <div>www.studioseg.me</div>
+                <div class="mono">+971 50 595 8429</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="kicker">Location</div>
+              <div>Dubai — United Arab Emirates</div>
+              <div class="muted">Serving GCC region</div>
+            </div>
+          </div>
+          <div class="meta">
+            <span class="chip">01 / 40</span>
+            <a class="arrow" href="#s2" aria-label="Next">→</a>
+          </div>
+        </section>
+
+        <!-- 02 ABOUT US -->
+        <section id="s2" class="slide">
+          <div class="kicker">About Us</div>
+          <h2 class="title">Turnkey Design for Luxury Homes & Commercial Spaces</h2>
+          <p class="desc">We’ve earned a reputation in the GCC market for creating sophisticated interiors of timeless quality. Our team respects your budget and timeline while translating ideas into crafted spaces that feel personal and perform beautifully.</p>
+          <div class="meta"><span class="chip">02 / 40</span><a class="arrow" href="#s3">→</a></div>
+        </section>
+
+        <!-- 03 INDEX -->
+        <section id="s3" class="slide">
+          <div class="kicker">Index</div>
+          <h2 class="title">What’s Inside</h2>
+          <div class="grid cols-3">
+            <div class="card"><div class="badge">01</div><strong>Our Mission</strong></div>
+            <div class="card"><div class="badge">02</div><strong>Our Vision</strong></div>
+            <div class="card"><div class="badge">03</div><strong>What Makes Us Different</strong></div>
+            <div class="card"><div class="badge">04</div><strong>Our Process</strong></div>
+            <div class="card"><div class="badge">05</div><strong>What We Do</strong></div>
+            <div class="card"><div class="badge">06</div><strong>Meet the Team</strong></div>
+            <div class="card"><div class="badge">07</div><strong>Project Portfolio</strong></div>
+          </div>
+          <div class="meta"><span class="chip">03 / 40</span><a class="arrow" href="#s4">→</a></div>
+        </section>
+
+        <!-- 04 MISSION -->
+        <section id="s4" class="slide">
+          <div class="kicker">Our Mission</div>
+          <h2 class="title">Visualize, Express, and Exceed</h2>
+          <ul class="clean desc">
+            <li class="li"><span class="dot"></span><span>Founded in Dubai by Architect Amna Moin and Oussama Houdroug.</span></li>
+            <li class="li"><span class="dot"></span><span>We translate client desires and personal style into interiors that push the limits of perfection.</span></li>
+            <li class="li"><span class="dot"></span><span>3D rendering experts turn ideas into life‑like visuals before execution.</span></li>
+          </ul>
+          <div class="meta"><span class="chip">04 / 40</span><a class="arrow" href="#s5">→</a></div>
+        </section>
+
+        <!-- 05 VISION -->
+        <section id="s5" class="slide">
+          <div class="kicker">Our Vision</div>
+          <h2 class="title">Design at Every Scale — From Buildings to a Single Wall</h2>
+          <p class="desc">Everyone deserves a beautiful home. We propose the best interior design, decor, and styling within each client’s budget — whether for an entire building, a small entrance, or one feature wall.</p>
+          <div class="meta"><span class="chip">05 / 40</span><a class="arrow" href="#s6">→</a></div>
+        </section>
+
+        <!-- 06 DIFFERENT -->
+        <section id="s6" class="slide">
+          <div class="kicker">What Makes Us Different</div>
+          <h2 class="title">Bringing Nature Back Into Design</h2>
+          <p class="desc">In the extreme built environment of the Middle East, we reconnect interiors to nature. We harmonize inside and outside by using materials in their true forms and celebrating natural textures.</p>
+          <div class="meta"><span class="chip">06 / 40</span><a class="arrow" href="#s7">→</a></div>
+        </section>
+
+        <!-- 07 STRATEGY -->
+        <section id="s7" class="slide">
+          <div class="kicker">Design Strategy</div>
+          <h2 class="title">Harmony • Authentic Materials • Human Comfort</h2>
+          <div class="grid cols-3">
+            <div class="card"><strong>Harmony</strong><div class="muted">Inside ↔ Outside continuity.</div></div>
+            <div class="card"><strong>Authenticity</strong><div class="muted">Materials in original forms.</div></div>
+            <div class="card"><strong>Comfort</strong><div class="muted">Function drives elegance.</div></div>
+          </div>
+          <div class="meta"><span class="chip">07 / 40</span><a class="arrow" href="#s8">→</a></div>
+        </section>
+
+        <!-- 08 WHAT WE DO -->
+        <section id="s8" class="slide">
+          <div class="kicker">What We Do</div>
+          <h2 class="title">Interior • Decoration • Landscape</h2>
+          <div class="grid cols-3">
+            <div class="card">
+              <div class="badge">Interior Design</div>
+              <ul class="clean">
+                <li class="li"><span class="dot"></span><span>Space planning, furniture layout</span></li>
+                <li class="li"><span class="dot"></span><span>Design consultation, partitions, stairs</span></li>
+                <li class="li"><span class="dot"></span><span>Entrances, corners, bedrooms, bathrooms</span></li>
+                <li class="li"><span class="dot"></span><span>Shops, offices, cafés / restaurants</span></li>
+                <li class="li"><span class="dot"></span><span>Flooring</span></li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="badge">Decoration</div>
+              <ul class="clean">
+                <li class="li"><span class="dot"></span><span>Furnishing, lighting, accessories</span></li>
+                <li class="li"><span class="dot"></span><span>Carpeting, curtains</span></li>
+                <li class="li"><span class="dot"></span><span>Hand‑made artwork</span></li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="badge">Landscape</div>
+              <ul class="clean">
+                <li class="li"><span class="dot"></span><span>Poolside decoration</span></li>
+                <li class="li"><span class="dot"></span><span>Balcony & garden</span></li>
+                <li class="li"><span class="dot"></span><span>Entrance & car shades</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="meta"><span class="chip">08 / 40</span><a class="arrow" href="#s9">→</a></div>
+        </section>
+
+        <!-- 09 LIGHTING PROMISE -->
+        <section id="s9" class="slide">
+          <div class="kicker">Lighting</div>
+          <h2 class="title">We Bring Life to Your Space</h2>
+          <p class="desc">Complete lighting design to set mood, define function, and elevate materials. Even with a small budget, we promise impactful changes that brighten corners and transform walls.</p>
+          <div class="meta"><span class="chip">09 / 40</span><a class="arrow" href="#s10">→</a></div>
+        </section>
+
+        <!-- 10 PROCESS -->
+        <section id="s10" class="slide">
+          <div class="kicker">Our Process</div>
+          <h2 class="title">Clear Steps • Clear Costs</h2>
+          <div class="grid cols-3">
+            <div class="card"><strong>Step 1 — Consultation</strong><div class="muted">2‑hour session based on your questionnaire. <span class="badge">AED 350</span></div></div>
+            <div class="card"><strong>Step 2 — Concept</strong><div class="muted">Agree on the initial concept, then proceed with a complete design proposal. <span class="badge">25%</span></div></div>
+            <div class="card"><strong>Step 3 — Delivery</strong><div class="muted">3D renderings + full design details. <span class="badge">100% payment</span><br/>Charges per m² × <strong>AED 200</strong>.</div></div>
+          </div>
+          <div class="meta"><span class="chip">10 / 40</span><a class="arrow" href="#s11">→</a></div>
+        </section>
+
+        <!-- 11 TEAM -->
+        <section id="s11" class="slide">
+          <div class="kicker">Meet the Team</div>
+          <h2 class="title">Core Team</h2>
+          <div class="grid cols-3">
+            <div class="card"><strong>Amna Moin</strong><div class="muted">Architect & Interior Designer — Co‑Founder</div></div>
+            <div class="card"><strong>Oussama Houdroug</strong><div class="muted">Architect & Interior Designer — Founder</div></div>
+            <div class="card"><strong>Rabah Insaf</strong><div class="muted">Senior Civil Engineer</div></div>
+            <div class="card"><strong>Abdul Moin</strong><div class="muted">Business Developer</div></div>
+          </div>
+          <div class="meta"><span class="chip">11 / 40</span><a class="arrow" href="#s12">→</a></div>
+        </section>
+
+        <!-- 12 PROJECTS OVERVIEW -->
+        <section id="s12" class="slide">
+          <div class="kicker">Projects</div>
+          <h2 class="title">Selected Portfolio</h2>
+          <p class="desc">Residential, hospitality, retail, and landscape commissions across the GCC and beyond.</p>
+          <div class="meta"><span class="chip">12 / 40</span><a class="arrow" href="#s13">→</a></div>
+        </section>
+
+        <!-- 13..24 NAMED PROJECTS (placeholders for imagery/text) -->
+        <!-- For each project, keep structure consistent so images/text can be dropped in quickly. -->
+        
+        <section id="s13" class="slide"><div class="kicker">Project</div><h2 class="title">Mehadji Apartment</h2><p class="desc">Placeholder for project description and highlights. Insert 2–4 images when available.</p><div class="meta"><span class="chip">13 / 40</span><a class="arrow" href="#s14">→</a></div></section>
+        <section id="s14" class="slide"><div class="kicker">Project</div><h2 class="title">Mrs. Loubna’s Apartment</h2><p class="desc">Placeholder for scope, style direction, and results.</p><div class="meta"><span class="chip">14 / 40</span><a class="arrow" href="#s15">→</a></div></section>
+        <section id="s15" class="slide"><div class="kicker">Project</div><h2 class="title">Mr Abdullah Al Amiri — Majlis</h2><p class="desc">Placeholder text for cultural cues, material palette, and seating plan.</p><div class="meta"><span class="chip">15 / 40</span><a class="arrow" href="#s16">→</a></div></section>
+        <section id="s16" class="slide"><div class="kicker">Project</div><h2 class="title">NAKHEEL CAFE</h2><p class="desc">Placeholder for café concept, lighting mood, and circulation.</p><div class="meta"><span class="chip">16 / 40</span><a class="arrow" href="#s17">→</a></div></section>
+        <section id="s17" class="slide"><div class="kicker">Project</div><h2 class="title">BRIDE HOME SHOP</h2><p class="desc">Placeholder for retail zoning, display systems, and materiality.</p><div class="meta"><span class="chip">17 / 40</span><a class="arrow" href="#s18">→</a></div></section>
+        <section id="s18" class="slide"><div class="kicker">Project</div><h2 class="title">TAIMOR VILLA</h2><p class="desc">Placeholder for villa planning, facade, and interiors.</p><div class="meta"><span class="chip">18 / 40</span><a class="arrow" href="#s19">→</a></div></section>
+        <section id="s19" class="slide"><div class="kicker">Project</div><h2 class="title">AMIR CAFE — ISTANBUL</h2><p class="desc">Placeholder for cross‑cultural design motifs and layout.</p><div class="meta"><span class="chip">19 / 40</span><a class="arrow" href="#s20">→</a></div></section>
+        <section id="s20" class="slide"><div class="kicker">Project</div><h2 class="title">INSAF LANDSCAPE</h2><p class="desc">Placeholder for planting scheme, hardscape, and lighting.</p><div class="meta"><span class="chip">20 / 40</span><a class="arrow" href="#s21">→</a></div></section>
+        <section id="s21" class="slide"><div class="kicker">Project</div><h2 class="title">ABDUL MOIN VILLA</h2><p class="desc">Placeholder for spatial sequence and material palette.</p><div class="meta"><span class="chip">21 / 40</span><a class="arrow" href="#s22">→</a></div></section>
+        <section id="s22" class="slide"><div class="kicker">Project</div><h2 class="title">TALAL VILLA</h2><p class="desc">Placeholder for program, landscape integration, and finishes.</p><div class="meta"><span class="chip">22 / 40</span><a class="arrow" href="#s23">→</a></div></section>
+        <section id="s23" class="slide"><div class="kicker">Project</div><h2 class="title">YOUSAF APARTMENT</h2><p class="desc">Placeholder for compact luxury, storage, and lighting design.</p><div class="meta"><span class="chip">23 / 40</span><a class="arrow" href="#s24">→</a></div></section>
+        <section id="s24" class="slide"><div class="kicker">Project</div><h2 class="title">SABRINA APARTMENT</h2><p class="desc">Placeholder for color story, textures, and custom furniture.</p><div class="meta"><span class="chip">24 / 40</span><a class="arrow" href="#s25">→</a></div></section>
+
+        <!-- 25..32 PROJECT GALLERIES (empty grids ready for images) -->
+        <section id="s25" class="slide"><div class="kicker">Gallery</div><h2 class="title">Project Gallery I</h2><div class="grid cols-3"><div class="card">Image slot</div><div class="card">Image slot</div><div class="card">Image slot</div></div><div class="meta"><span class="chip">25 / 40</span><a class="arrow" href="#s26">→</a></div></section>
+        <section id="s26" class="slide"><div class="kicker">Gallery</div><h2 class="title">Project Gallery II</h2><div class="grid cols-3"><div class="card">Image slot</div><div class="card">Image slot</div><div class="card">Image slot</div></div><div class="meta"><span class="chip">26 / 40</span><a class="arrow" href="#s27">→</a></div></section>
+        <section id="s27" class="slide"><div class="kicker">Gallery</div><h2 class="title">Project Gallery III</h2><div class="grid cols-3"><div class="card">Image slot</div><div class="card">Image slot</div><div class="card">Image slot</div></div><div class="meta"><span class="chip">27 / 40</span><a class="arrow" href="#s28">→</a></div></section>
+        <section id="s28" class="slide"><div class="kicker">Gallery</div><h2 class="title">Project Gallery IV</h2><div class="grid cols-3"><div class="card">Image slot</div><div class="card">Image slot</div><div class="card">Image slot</div></div><div class="meta"><span class="chip">28 / 40</span><a class="arrow" href="#s29">→</a></div></section>
+        <section id="s29" class="slide"><div class="kicker">Gallery</div><h2 class="title">Project Gallery V</h2><div class="grid cols-3"><div class="card">Image slot</div><div class="card">Image slot</div><div class="card">Image slot</div></div><div class="meta"><span class="chip">29 / 40</span><a class="arrow" href="#s30">→</a></div></section>
+        <section id="s30" class="slide"><div class="kicker">Gallery</div><h2 class="title">Project Gallery VI</h2><div class="grid cols-3"><div class="card">Image slot</div><div class="card">Image slot</div><div class="card">Image slot</div></div><div class="meta"><span class="chip">30 / 40</span><a class="arrow" href="#s31">→</a></div></section>
+        <section id="s31" class="slide"><div class="kicker">Gallery</div><h2 class="title">Project Gallery VII</h2><div class="grid cols-3"><div class="card">Image slot</div><div class="card">Image slot</div><div class="card">Image slot</div></div><div class="meta"><span class="chip">31 / 40</span><a class="arrow" href="#s32">→</a></div></section>
+        <section id="s32" class="slide"><div class="kicker">Gallery</div><h2 class="title">Project Gallery VIII</h2><div class="grid cols-3"><div class="card">Image slot</div><div class="card">Image slot</div><div class="card">Image slot</div></div><div class="meta"><span class="chip">32 / 40</span><a class="arrow" href="#s33">→</a></div></section>
+
+        <!-- 33..35 SERVICE DETAIL SLIDES -->
+        <section id="s33" class="slide"><div class="kicker">Services</div><h2 class="title">Interior Design — Detail</h2><p class="desc">Deep‑dive into space planning, furniture layout, stairs, partitions, bedrooms, bathrooms, and hospitality work.</p><div class="meta"><span class="chip">33 / 40</span><a class="arrow" href="#s34">→</a></div></section>
+        <section id="s34" class="slide"><div class="kicker">Services</div><h2 class="title">Decoration — Detail</h2><p class="desc">FF&E selection, custom pieces, accessories, carpets, curtains, and coordination with art / craft partners.</p><div class="meta"><span class="chip">34 / 40</span><a class="arrow" href="#s35">→</a></div></section>
+        <section id="s35" class="slide"><div class="kicker">Services</div><h2 class="title">Landscape — Detail</h2><p class="desc">Balcony & garden concepts, poolside ambiences, and shaded parking solutions integrated into architecture.</p><div class="meta"><span class="chip">35 / 40</span><a class="arrow" href="#s36">→</a></div></section>
+
+        <!-- 36..40 CONTACT / SOCIAL / WHY / THANKS -->
+        <section id="s36" class="slide"><div class="kicker">Contact</div><h2 class="title">Let’s Design Something Beautiful</h2><div class="grid cols-2"><div class="card"><strong>Email</strong><div class="mono">info@studioseg.me</div><div class="spacer"></div><strong>Phone</strong><div class="mono">+971 50 595 8429</div></div><div class="card"><strong>Web</strong><div class="mono">www.studioseg.me</div><div class="spacer"></div><strong>Region</strong><div>Dubai • GCC</div></div></div><div class="meta"><span class="chip">36 / 40</span><a class="arrow" href="#s37">→</a></div></section>
+        <section id="s37" class="slide"><div class="kicker">Social</div><h2 class="title">Follow Our Work</h2><p class="desc">Add social links or QR codes here. Placeholder for Instagram, Behance, LinkedIn.</p><div class="meta"><span class="chip">37 / 40</span><a class="arrow" href="#s38">→</a></div></section>
+        <section id="s38" class="slide"><div class="kicker">Clients</div><h2 class="title">What Clients Say</h2><p class="desc">Placeholder quotes and testimonials. Add 2–3 short highlights with client initials.</p><div class="meta"><span class="chip">38 / 40</span><a class="arrow" href="#s39">→</a></div></section>
+        <section id="s39" class="slide"><div class="kicker">Why Us</div><h2 class="title">Budget‑Respectful • Timeline‑Driven • Crafted</h2><p class="desc">We deliver sophisticated interiors aligned to your style, budget, and schedule — with transparent process and detailed visuals before execution.</p><div class="meta"><span class="chip">39 / 40</span><a class="arrow" href="#s40">→</a></div></section>
+        <section id="s40" class="slide">
+          <div class="kicker">Thank You</div>
+          <h2 class="title">STUDIO SEG — Interior really matters…</h2>
+          <p class="desc">We’re excited to collaborate. This single‑page profile mirrors a 40‑slide deck structure and is ready for your images and final copy.</p>
+          <div class="meta"><a class="arrow" href="#s1" aria-label="Top">↑</a><span class="chip">40 / 40</span></div>
+        </section>
+      </div>
+      <footer>© STUDIO SEG. Crafted in black & gold.</footer>
+    </main>
+  </div>
+</body>
+</html>

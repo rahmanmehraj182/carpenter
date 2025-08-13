@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Interior Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            margin: 100px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
+        .section:nth-child(5) { animation-delay: 0.8s; }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            color: #cccccc;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* Section 1: Hero Grid Layout */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            padding: 40px;
+        }
+
+        .hero-image {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Section 2: Diagonal Split */
+        .diagonal-split {
+            position: relative;
+            background: linear-gradient(45deg, #000000 50%, #ffd700 50%);
+            padding: 80px 0;
+            overflow: hidden;
+        }
+
+        .diagonal-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .diagonal-text {
+            padding: 40px;
+            color: #ffffff;
+        }
+
+        .diagonal-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .diagonal-images img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            filter: brightness(0.9);
+            transition: all 0.4s ease;
+        }
+
+        .diagonal-images img:hover {
+            filter: brightness(1.1);
+            transform: translateY(-10px);
+        }
+
+        /* Section 3: Floating Cards */
+        .floating-cards {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .floating-card {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #ffd700;
+            border-radius: 25px;
+            padding: 30px;
+            width: 350px;
+            transform: translateY(0);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .floating-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 30px 60px rgba(255, 215, 0, 0.4);
+        }
+
+        .floating-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            color: #ffd700;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            color: #cccccc;
+            font-size: 0.95rem;
+        }
+
+        /* Section 4: Masonry Layout */
+        .masonry-section {
+            padding: 80px 0;
+        }
+
+        .masonry-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            grid-auto-rows: 200px;
+        }
+
+        .masonry-item {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(45deg, #1a1a1a, #333333);
+            transition: all 0.4s ease;
+        }
+
+        .masonry-item:nth-child(1) { grid-row-end: span 2; }
+        .masonry-item:nth-child(3) { grid-row-end: span 2; }
+
+        .masonry-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .masonry-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px rgba(255, 215, 0, 0.3);
+        }
+
+        .masonry-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .masonry-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .masonry-item:hover .masonry-overlay {
+            transform: translateY(0);
+        }
+
+        /* Section 5: Timeline Layout */
+        .timeline-section {
+            padding: 80px 0;
+            background: radial-gradient(circle at center, #2a2a2a 0%, #1a1a1a 100%);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, #ffd700, #ffed4a);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background: inherit;
+            width: 50%;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background: #ffd700;
+            border: 4px solid #1a1a1a;
+            top: 50%;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 30px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #ffd700;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-title {
+            color: #ffd700;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-image {
+                height: 400px;
+            }
+
+            .diagonal-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .cards-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .masonry-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .masonry-item:nth-child(1),
+            .masonry-item:nth-child(3) {
+                grid-row-end: span 1;
+            }
+
+            .timeline::after {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 60px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 10px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section {
+                margin: 50px 0;
+            }
+
+            .floating-card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .hero-content,
+            .diagonal-text {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Section 1: Hero Grid Layout -->
+        <section class="section">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h2>Modern Luxury Living</h2>
+                    <p class="project-description">
+                        A sophisticated penthouse transformation featuring minimalist design principles combined with luxurious gold accents. This project showcases our ability to create spaces that breathe elegance while maintaining functionality.
+                    </p>
+                </div>
+                <div class="hero-image">
+                    <img src="./images/gulshan1.jpeg" alt="Modern luxury living room with gold accents">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Diagonal Split -->
+        <section class="section">
+            <div class="diagonal-split">
+                <div class="container">
+                    <div class="diagonal-content">
+                        <div class="diagonal-text">
+                            <h2>Executive Office Suite</h2>
+                            <p class="project-description">
+                                A commanding workspace designed for success. Rich black surfaces complemented by strategic gold elements create an atmosphere of power and sophistication that inspires productivity and impresses clients.
+                            </p>
+                        </div>
+                        <div class="diagonal-images">
+                            <img src="./images/Office_banani_2.jpeg" alt="Executive office interior">
+                            <img src="./images/Office_banani_3.jpeg" alt="Office meeting room">
+                            <img src="./images/banani3.jpeg" alt="Office workspace">
+                            <img src="./images/Office_banani_1.jpeg" alt="Executive desk area">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Floating Cards -->
+        <section class="section">
+            <div class="floating-cards">
+                <h2>Boutique Restaurant Collection</h2>
+                <p class="project-description" style="margin: 0 auto;">
+                    Three distinct dining experiences, each telling its own story through carefully curated design elements.
+                </p>
+                <div class="cards-container">
+                    <div class="floating-card">
+                        <img src="./images/gulshan1.jpeg" alt="Fine dining restaurant">
+                        <div class="card-title">Fine Dining Elegance</div>
+                        <div class="card-description">Intimate atmosphere with dramatic lighting and luxurious materials</div>
+                    </div>
+                    <div class="floating-card">
+                        <img src="./images/gulshan2.jpeg" alt="Modern cafe interior">
+                        <div class="card-title">Contemporary Bistro</div>
+                        <div class="card-description">Modern comfort meets timeless sophistication in this urban retreat</div>
+                    </div>
+                    <div class="floating-card">
+                        <img src="./images/gulshan3.jpeg" alt="Upscale bar interior">
+                        <div class="card-title">Signature Lounge</div>
+                        <div class="card-description">Where conversations flow as smoothly as the premium spirits</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Masonry Layout -->
+        <section class="section">
+            <div class="masonry-section">
+                <div class="masonry-header">
+                    <h2>Residential Masterpieces</h2>
+                    <p class="project-description" style="margin: 0 auto;">
+                        A collection of bespoke homes where architecture meets artistry, creating living spaces that are both functional and inspiring.
+                    </p>
+                </div>
+                <div class="masonry-grid">
+                    <div class="masonry-item">
+                        <img src="./images/kpb1.jpeg" alt="Luxury bedroom">
+                        <div class="masonry-overlay">
+                            <div class="timeline-title">Master Suite Haven</div>
+                            <p>Serene luxury redefined</p>
+                        </div>
+                    </div>
+                    <div class="masonry-item">
+                        <img src="./images/kpb2.jpeg" alt="Modern kitchen">
+                        <div class="masonry-overlay">
+                            <div class="timeline-title">Culinary Theater</div>
+                            <p>Where cooking becomes art</p>
+                        </div>
+                    </div>
+                    <div class="masonry-item">
+                        <img src="./images/kpb3.jpeg" alt="Luxury bathroom">
+                        <div class="masonry-overlay">
+                            <div class="timeline-title">Spa Sanctuary</div>
+                            <p>Personal wellness retreat</p>
+                        </div>
+                    </div>
+                    <div class="masonry-item">
+                        <img src="./images/img2.png" alt="Home library">
+                        <div class="masonry-overlay">
+                            <div class="timeline-title">Private Library</div>
+                            <p>Knowledge meets comfort</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Timeline Layout -->
+        <section class="section">
+            <div class="timeline-section">
+                <div class="container">
+                    <h2 style="text-align: center; margin-bottom: 60px;">Hotel & Hospitality Excellence</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <img src="./images/banani1.jpeg" alt="Luxury hotel lobby" class="timeline-image">
+                                <div class="timeline-title">Grand Hotel Lobby</div>
+                                <p>Majestic entrance that sets the tone for unparalleled luxury experiences</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <img src="./images/abroad2.jpeg" alt="Hotel suite" class="timeline-image">
+                                <div class="timeline-title">Presidential Suite</div>
+                                <p>Where comfort meets grandeur in perfect harmony</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <img src="./images/abroad1.jpeg" alt="Hotel restaurant" class="timeline-image">
+                                <div class="timeline-title">Signature Restaurant</div>
+                                <p>Culinary excellence in an atmosphere of refined elegance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

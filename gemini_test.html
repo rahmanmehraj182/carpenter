@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Interior Projects | Black & Gold</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1D1D1D;
+            --primary-text-color: #EAEAEA;
+            --secondary-text-color: #A9A9A9;
+            --accent-color: #C0A062; /* A sophisticated, muted gold */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            margin: 120px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s ease-in-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
+        .section:nth-child(5) { animation-delay: 0.8s; }
+
+        h2 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 500;
+            margin-bottom: 24px;
+            color: var(--primary-text-color);
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--secondary-text-color);
+            max-width: 600px;
+            margin-bottom: 50px;
+        }
+
+        /* Section 1: Hero Grid Layout */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero-image {
+            height: 550px;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Section 2: Clean Grid */
+        .clean-grid-section {
+            padding: 80px 0;
+            background-color: var(--surface-color);
+            border-radius: 20px;
+        }
+
+        .clean-grid-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .clean-grid-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .clean-grid-images img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .clean-grid-images img:hover {
+            transform: scale(1.03);
+            filter: brightness(1.1);
+        }
+
+        /* Section 3: Info Cards */
+        .cards-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .info-card {
+            background-color: var(--surface-color);
+            border-radius: 16px;
+            padding: 25px;
+            width: 350px;
+            transform: translateY(0);
+            transition: all 0.4s ease-in-out;
+            text-align: left;
+            border: 1px solid transparent;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            color: var(--secondary-text-color);
+            font-size: 0.95rem;
+        }
+
+        /* Section 4: Masonry Layout */
+        .masonry-section {
+            padding: 80px 0;
+        }
+
+        .masonry-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            grid-auto-rows: 250px;
+        }
+        
+        .masonry-item {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .masonry-item:nth-child(1) { grid-row-end: span 2; }
+        .masonry-item:nth-child(5) { grid-row-end: span 2; }
+        .masonry-item:nth-child(6) { grid-column-end: span 2; }
+
+
+        .masonry-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out, filter 0.4s ease;
+        }
+
+        .masonry-item:hover img {
+            transform: scale(1.05);
+            filter: brightness(0.7);
+        }
+
+        .masonry-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 25px;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        .masonry-item:hover .masonry-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .overlay-title {
+            color: white;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+        .overlay-description {
+            color: #ccc;
+        }
+
+        /* Section 5: Timeline Layout */
+        .timeline-section {
+            padding: 80px 0;
+            background-color: var(--surface-color);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--accent-color);
+            opacity: 0.3;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: -8px;
+            background-color: var(--bg-color);
+            border: 3px solid var(--accent-color);
+            top: calc(50% - 8px);
+            border-radius: 50%;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .timeline-item:hover::after {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -8px;
+        }
+
+        .timeline-content {
+            padding: 25px;
+            background-color: var(--bg-color);
+            border-radius: 16px;
+        }
+
+        .timeline-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-title {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .timeline-description {
+            color: var(--secondary-text-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .clean-grid-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .clean-grid-text {
+                order: -1; /* Place text before images on smaller screens */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h2 {
+                font-size: clamp(1.8rem, 7vw, 2.5rem);
+            }
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-image {
+                height: 400px;
+            }
+            .section-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cards-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .info-card {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .masonry-grid {
+                grid-auto-rows: 220px;
+            }
+
+            .masonry-item:nth-child(1),
+            .masonry-item:nth-child(5),
+            .masonry-item:nth-child(6) {
+                grid-row-end: span 1;
+                grid-column-end: span 1;
+            }
+
+            .timeline::after {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 60px;
+                padding-right: 15px;
+            }
+
+            .timeline-item::after {
+                left: 12px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section {
+                margin: 80px 0;
+            }
+
+            .info-card {
+                width: 100%;
+            }
+
+            .clean-grid-images {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="section">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h2>Spaces That Inspire</h2>
+                    <p class="section-description">
+                        We transform environments through sophisticated design, combining minimalist principles with functional elegance to create spaces that feel both luxurious and livable.
+                    </p>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=2127&auto=format&fit=crop" alt="Modern luxury living room">
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clean-grid-section">
+                <div class="container">
+                    <div class="clean-grid-content">
+                        <div class="clean-grid-text">
+                            <h2>Executive Office Suite</h2>
+                            <p class="section-description">
+                                A commanding workspace designed for success. Muted tones and refined materials create an atmosphere of focus and sophistication that inspires productivity.
+                            </p>
+                        </div>
+                        <div class="clean-grid-images">
+                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1932&auto=format&fit=crop" alt="Executive office interior">
+                            <img src="https://images.unsplash.com/photo-1600508774634-4a11282d4ce3?q=80&w=2070&auto=format&fit=crop" alt="Office meeting room">
+                            <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1932&auto=format&fit=crop" alt="Office lounge area">
+                            <img src="https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?q=80&w=2070&auto=format&fit=crop" alt="Collaborative workspace">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="cards-section">
+                <h2>Boutique Dining Collection</h2>
+                <p class="section-description" style="margin-left:auto; margin-right:auto;">
+                    Three distinct dining experiences, each telling its own story through carefully curated design elements.
+                </p>
+                <div class="cards-container">
+                    <div class="info-card">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop" alt="Fine dining restaurant">
+                        <div class="card-title">Urban Eatery</div>
+                        <div class="card-description">An intimate atmosphere with warm lighting and natural materials for a grounded, elegant meal.</div>
+                    </div>
+                    <div class="info-card">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop" alt="Modern cafe interior">
+                        <div class="card-title">Contemporary Bistro</div>
+                        <div class="card-description">Modern comfort meets timeless sophistication, providing a welcoming urban retreat.</div>
+                    </div>
+                    <div class="info-card">
+                        <img src="https://images.unsplash.com/photo-1578311903337-38b46149174b?q=80&w=1974&auto=format&fit=crop" alt="Upscale bar interior">
+                        <div class="card-title">Signature Lounge</div>
+                        <div class="card-description">Where conversations flow in a thoughtfully designed space for connection and relaxation.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="masonry-section">
+                <div class="masonry-header">
+                    <h2>Residential Masterpieces</h2>
+                    <p class="section-description" style="margin-left:auto; margin-right:auto;">
+                        A collection of bespoke homes where architecture meets artistry, creating living spaces that are both functional and inspiring.
+                    </p>
+                </div>
+                <div class="masonry-grid">
+                    <div class="masonry-item">
+                        <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?q=80&w=1974&auto=format&fit=crop" alt="Luxury bedroom">
+                        <div class="masonry-overlay">
+                           <div class="overlay-title">Master Suite Haven</div>
+                           <p class="overlay-description">Serene luxury redefined</p>
+                        </div>
+                    </div>
+                    <div class="masonry-item">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" alt="Modern kitchen">
+                         <div class="masonry-overlay">
+                           <div class="overlay-title">Culinary Theater</div>
+                           <p class="overlay-description">Where cooking becomes art</p>
+                        </div>
+                    </div>
+                    <div class="masonry-item">
+                        <img src="https://images.unsplash.com/photo-1586798271654-0471bb1b215f?q=80&w=1974&auto=format&fit=crop" alt="Luxury bathroom">
+                         <div class="masonry-overlay">
+                           <div class="overlay-title">Spa Sanctuary</div>
+                           <p class="overlay-description">Personal wellness retreat</p>
+                        </div>
+                    </div>
+                     <div class="masonry-item">
+                        <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02a4?q=80&w=2070&auto=format&fit=crop" alt="Living room detail">
+                         <div class="masonry-overlay">
+                           <div class="overlay-title">Comfort in Detail</div>
+                           <p class="overlay-description">Crafted for everyday living</p>
+                        </div>
+                    </div>
+                    <div class="masonry-item">
+                        <img src="https://images.unsplash.com/photo-1617103995736-085e6b3a39a9?q=80&w=1964&auto=format&fit=crop" alt="Cozy reading nook">
+                         <div class="masonry-overlay">
+                           <div class="overlay-title">Quiet Corner</div>
+                           <p class="overlay-description">A space for calm reflection</p>
+                        </div>
+                    </div>
+                    <div class="masonry-item">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop" alt="Minimalist hallway">
+                         <div class="masonry-overlay">
+                           <div class="overlay-title">Seamless Transitions</div>
+                           <p class="overlay-description">Flow and function in harmony</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="timeline-section">
+                <div class="container">
+                    <h2 style="text-align: center; margin-bottom: 60px;">Hospitality Excellence</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop" alt="Luxury hotel lobby" class="timeline-image">
+                                <div class="timeline-title">Grand Hotel Lobby</div>
+                                <p class="timeline-description">A majestic entrance that sets the tone for an unparalleled guest experience.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <img src="https://images.unsplash.com/photo-1590490359853-382a297e2093?q=80&w=1974&auto=format&fit=crop" alt="Hotel suite" class="timeline-image">
+                                <div class="timeline-title">Presidential Suite</div>
+                                <p class="timeline-description">Where comfort meets grandeur, designed for ultimate rest and rejuvenation.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <img src="https://images.unsplash.com/photo-1598546522889-a2818b635741?q=80&w=2070&auto=format&fit=crop" alt="Hotel restaurant" class="timeline-image">
+                                <div class="timeline-title">Signature Restaurant</div>
+                                <p class="timeline-description">Culinary excellence delivered in an atmosphere of refined, quiet elegance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
